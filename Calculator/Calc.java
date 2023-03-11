@@ -26,7 +26,7 @@ public class Calc extends JFrame implements ActionListener {
         addt = new CalcPad("+",70,50,0xf3aa37);
         eq = new CalcPad("=",70,50,0xf3aa37);
         cl = new CalcPad("C",70,50,0xf3aa37);
-        sign = new CalcPad("+/-",70,50,0xf3aa37);
+        sign = new CalcPad("±",70,50,0xf3aa37);
         perc = new CalcPad("%",70,50,0xf3aa37);
         comm = new CalcPad(",",70,50);
 
@@ -104,7 +104,7 @@ public class Calc extends JFrame implements ActionListener {
                     num2 = num2 + cpad;
                 }
             }
-			else {
+	    else {
                 if(cpad.equals(",") && !num1.equals("")) {
                     num1 = num1 + ".";
                 }
@@ -129,7 +129,7 @@ public class Calc extends JFrame implements ActionListener {
             num2 = oper = "";
         }
         else if (oper.equals("") && num2.equals("") && !num1.equals("")) {
-            if(cpad.equals("+/-")){
+            if(cpad.equals("±")){
                 tmp = Integer.parseInt(num1);
                 tmp *=  sign;
                 num1 = Integer.toString(tmp);

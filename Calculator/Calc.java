@@ -28,7 +28,7 @@ public class Calc extends JFrame implements ActionListener {
         cl = new CalcPad("C",70,50,0xf3aa37);
         sign = new CalcPad("+/-",70,50,0xf3aa37);
         perc = new CalcPad("%",70,50,0xf3aa37);
-        comm = new CalcPad(".",70,50);
+        comm = new CalcPad(",",70,50);
 
         b0.addActionListener(this);
         b1.addActionListener(this);
@@ -80,43 +80,71 @@ public class Calc extends JFrame implements ActionListener {
         this.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
         this.getContentPane().setBackground(new Color(0x666262));
         this.setResizable(false);
+        this.setTitle("Calculator");
         this.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        double numA=0,numB=0;
+        double numA=1,numB=0;
+        int sign=-1;
+        int tmp;
         String cpad = e.getActionCommand();
         if (cpad.equals("C")) {
             num1 = num2 = oper = "";
             text.setText("");
         }
-        else if((cpad.charAt(0)>='0' && cpad.charAt(0)<='9') || cpad.equals("."))
+        else if((cpad.charAt(0)>='0' && cpad.charAt(0)<='9') || cpad.equals(","))
         {
             if (!oper.equals("")) {
-				num2 = num2 + cpad;
+                if(cpad.equals(",") && !num2.equals("")) {
+                    num2 = num2 + ".";
+                }
+                else {
+                    num2 = num2 + cpad;
+                }
             }
 			else {
+                if(cpad.equals(",") && !num1.equals("")) {
+                    num1 = num1 + ".";
+                }
+                else {
 				num1 = num1 + cpad;
+                }
             }
             text.setText(num1 + oper + num2);    
         }  
         else if (cpad.equals("=") && !oper.equals("")) {
             double res=0;
-            numB = Double.parseDouble(num2);
-            numA= Double.parseDouble(num1);
+            numB= Double.parseDouble(num2);
+            numA = Double.parseDouble(num1);
             switch(oper) {
-            case "+" :  res = numA + numB; break;
-            case "-" :  res = numA - numB; break;
-            case "÷" :  res = numA / numB; break;
-            case "x" :  res = numA * numB; break;
+                case "+" :  res = numA + numB; break;
+                case "-" :  res = numA - numB; break;
+                case "÷" :  res = numA / numB; break;
+                case "x" :  res = numA * numB; break;
             }
             text.setText((num1 + oper + num2 + "=" + res));
             num1 = Double.toString(res);
             num2 = oper = "";
         }
         else if (oper.equals("") && num2.equals("") && !num1.equals("")) {
+            if(cpad.equals("+/-")){
+                tmp = Integer.parseInt(num1);
+                tmp *=  sign;
+                num1 = Integer.toString(tmp);
+                text.setText(num1);
+                sign *= -1;
+            }
+            else if(cpad.equals("%")) {
+                numA = Double.parseDouble(num1);
+                numA = numA / 100;
+                num1 = Double.toString(numA);
+                text.setText(num1);
+            }
+            else{   
             oper += cpad;
             text.setText(num1 + oper);   
+            }
         }
     }
     public static void main (String[] args) {

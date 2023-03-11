@@ -8,7 +8,7 @@ public class CalcPad extends JButton {
         this.setText(text);
         this.setPreferredSize(new Dimension(width,height));
         this.setFocusable(false); 
-        this.setFont(new Font("Calibri",Font.PLAIN,20));
+        this.setFont(new Font("Helvetica",Font.PLAIN,20));
     }
     CalcPad(String text,int width,int height,int color) {
         this.setText(text);

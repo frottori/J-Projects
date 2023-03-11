@@ -108,7 +108,7 @@ public class Calc extends JFrame implements ActionListener {
                     num1 = num1 + ".";
                 }
                 else {
-				num1 = num1 + cpad;
+		    num1 = num1 + cpad;
                 }
             }
             text.setText(num1 + oper + num2);    
@@ -142,8 +142,8 @@ public class Calc extends JFrame implements ActionListener {
                 text.setText(num1);
             }
             else{   
-            oper += cpad;
-            text.setText(num1 + oper);   
+                oper += cpad;
+                text.setText(num1 + oper);   
             }
         }
     }

@@ -56,6 +56,7 @@ public class Calc extends JFrame implements ActionListener {
         text.setFont(new Font("Helvetica",Font.PLAIN,17));
 	text.setBackground(new Color(0x666262));
         text.setForeground(Color.WHITE);
+	text.setHorizontalAlignment(SwingConstants.RIGHT);
 
         this.add(text);
         this.add(cl);

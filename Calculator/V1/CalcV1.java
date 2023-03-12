@@ -106,36 +106,36 @@ public class CalcV1 extends JFrame implements ActionListener {
                     num2 = num2 + cpad;
                 }
             }
-			else {
+	    else {
                 if(cpad.equals(",") && !num1.equals("")) {
                     num1 = num1 + ".";
                 }
                 else {
-				    num1 = num1 + cpad;
+		    num1 = num1 + cpad;
                 }
             }
             text.setText(num1 + oper + num2);    
         }  
         else if (cpad.equals("±") && !oper.equals("") && !num2.equals("")) {
-                tmp = Integer.parseInt(num2);
+        	tmp = Integer.parseInt(num2);
                 tmp *=  sign2;
                 num2 = Integer.toString(tmp);
                 text.setText(num1 + oper + num2 );
                 sign2 *= -1;
         }
         else if (cpad.equals("=") && !oper.equals("")) {
-            double res=0;
-            numB= Double.parseDouble(num2);
-            numA = Double.parseDouble(num1);
-            switch(oper) {
-                case "+" :  res = numA + numB; break;
-                case "-" :  res = numA - numB; break;
-                case "÷" :  res = numA / numB; break;
-                case "x" :  res = numA * numB; break;
-            }
-            text.setText((num1 + oper + num2 + "=" + res));
-            num1 = Double.toString(res);
-            num2 = oper = "";
+            	double res=0;
+            	numB= Double.parseDouble(num2);
+            	numA = Double.parseDouble(num1);
+            	switch(oper) {
+                	case "+" :  res = numA + numB; break;
+                	case "-" :  res = numA - numB; break;
+                	case "÷" :  res = numA / numB; break;
+                	case "x" :  res = numA * numB; break;
+            	}
+            	text.setText((num1 + oper + num2 + "=" + res));
+            	num1 = Double.toString(res);
+            	num2 = oper = "";
         }
         else if (oper.equals("") && num2.equals("") && !num1.equals("")) {
             if(cpad.equals("±")){

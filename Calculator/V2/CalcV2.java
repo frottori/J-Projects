@@ -3,13 +3,13 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.text.DecimalFormat;
 
-public class Calc extends JFrame implements ActionListener {
+public class CalcV2 extends JFrame implements ActionListener {
 
     CalcPad b0,b1,b2,b3,b4,b5,b6,b7,b8,b9,mult,sub,addt,eq,cl,sign,div,perc,comm;
     JTextField text;
     String num1,oper,num2;
     
-    Calc() {
+    CalcV2() {
         oper = num1 = num2 = "";
         b0 = new CalcPad("0",140,50);
         b1 = new CalcPad("1",70,50);
@@ -185,6 +185,6 @@ public class Calc extends JFrame implements ActionListener {
         }
     }
     public static void main (String[] args) {
-        new Calc();
+        new CalcV2();
     }
 }

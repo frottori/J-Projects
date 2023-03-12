@@ -131,7 +131,7 @@ public class CalcV2 extends JFrame implements ActionListener {
                 }
                 text.setText(num2);
             }
-	         else {
+	    else {
                 if(cpad.equals(",") && !num1.equals("")) {
                     num1 += ".";
                 }
@@ -142,12 +142,12 @@ public class CalcV2 extends JFrame implements ActionListener {
             }
         }
         else if (cpad.equals("±") && !oper.equals("") && !num2.equals("")) {
-            tmp = Double.parseDouble(num2);
-            tmp *=  sign2;
-            formatted=formatNumber(tmp);
-            num2 = Double.toString(tmp);
-            text.setText(formatted);
-            sign2 *= -1;
+            	tmp = Double.parseDouble(num2);
+            	tmp *=  sign2;
+            	formatted=formatNumber(tmp);
+            	num2 = Double.toString(tmp);
+            	text.setText(formatted);
+            	sign2 *= -1;
         }
         else if (cpad.equals("=") && !oper.equals("")) {
                 double res=0;

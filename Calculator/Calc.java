@@ -54,6 +54,8 @@ public class Calc extends JFrame implements ActionListener {
         text.setPreferredSize(new Dimension(280,40));
         text.setEditable(false); 
         text.setFont(new Font("Helvetica",Font.PLAIN,17));
+	text.setBackground(new Color(0x666262));
+        text.setForeground(Color.WHITE);
 
         this.add(text);
         this.add(cl);

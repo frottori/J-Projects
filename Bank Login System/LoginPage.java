@@ -16,15 +16,17 @@ public class LoginPage implements ActionListener {
     JButton signIn;
     JButton signUp;
     JButton register;
+    JButton logOut;
     JButton deposit;
     JButton withdraw;
-    JButton withEnter;
-    JButton depositEnter;
+    JButton withdrawValue;
+    JButton depositValue;
     AccountField fname;
     AccountField lname;
-    AccountField gender; 
+    AccountField genderbox; 
+    AccountField gender;
     AccountField balance; 
-    AccountField Value;
+    AccountField value;
     
     LoginPage() {
 
@@ -65,17 +67,18 @@ public class LoginPage implements ActionListener {
         signUp.setBounds(350,130,70,33);
         signUp.setFocusable(false);
         signUp.addActionListener(this);
-
         register = new JButton("Register");
         register.addActionListener(this);
+        logOut = new JButton("Log Out");
+        logOut.addActionListener(this);
         withdraw = new JButton("Withdraw");
         withdraw.addActionListener(this);
         deposit = new JButton("Deposit");
         deposit.addActionListener(this);
-        withEnter = new JButton("Withdraw");
-        withEnter.addActionListener(this);
-        depositEnter = new JButton("Deposit");
-        depositEnter.addActionListener(this);
+        withdrawValue = new JButton("Withdraw");
+        withdrawValue.addActionListener(this);
+        depositValue = new JButton("Deposit");
+        depositValue.addActionListener(this);
 
         frame.add(label);
         frame.add(userLabel);
@@ -93,8 +96,10 @@ public class LoginPage implements ActionListener {
         fname = new AccountField("First Name :",10,50); 
         lname = new AccountField("Last Name :", 40, 80); 
         gender = new AccountField("Gender :", 70, 110);
-        balance = new AccountField("Balance :", 100, 140);  
-        Value = new AccountField("Withdraw :", 40, 80);
+        String[] options = {"Male", "Female","Other"};
+        genderbox = new AccountField("Gender :", 70, 110,options);
+        balance = new AccountField("Balance :", 100, 140); 
+        value = new AccountField("Withdraw :", 40, 80);
         info = new UserAccounts();
 
         //Frames
@@ -125,6 +130,8 @@ public class LoginPage implements ActionListener {
                     gender.getField().setText(info.getGender().get(username));  gender.getField().setEditable(false);
                     balance.getField().setText(Double.toString(info.getMoney().get(username))); balance.getField().setEditable(false);
 
+                    logOut.setBounds(210,170,70,33);
+                    logOut.setFocusable(false);
                     withdraw.setBounds(280,170,70,33);
                     withdraw.setFocusable(false);
                     deposit.setBounds(350,170,70,33);
@@ -138,6 +145,7 @@ public class LoginPage implements ActionListener {
                     accountWindow.add(gender.getLabel());
                     accountWindow.add(balance.getField());
                     accountWindow.add(balance.getLabel());
+                    accountWindow.add(logOut);
                     accountWindow.add(withdraw);
                     accountWindow.add(deposit);
                     accountWindow.add(title);
@@ -152,7 +160,6 @@ public class LoginPage implements ActionListener {
             if (!info.getLoginInfo().containsKey(username))  {  //if username isn't already taken
                
                 info.getLoginInfo().put(username,password); //puts new entry on hashmap
-
                 forum.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 forum.setLayout(null);
 
@@ -169,14 +176,13 @@ public class LoginPage implements ActionListener {
 
                 fname.getField().setText(""); fname.getField().setEditable(true);
                 lname.getField().setText(""); lname.getField().setEditable(true);
-                gender.getField().setText(""); gender.getField().setEditable(true);
                 
                 forum.add(fname.getField());
                 forum.add(fname.getLabel());
                 forum.add(lname.getField());
                 forum.add(lname.getLabel());
-                forum.add(gender.getField());
-                forum.add(gender.getLabel());
+                forum.add(genderbox.getLabel());
+                forum.add(genderbox.getBox());
                 forum.add(register);
                 forum.add(title);
                 forum.getContentPane().setBackground(new Color(0x575658));
@@ -189,7 +195,7 @@ public class LoginPage implements ActionListener {
         {
                 info.getFirstName().put(username,fname.getField().getText());
                 info.getLastName().put(username,lname.getField().getText());
-                info.getGender().put(username,gender.getField().getText()); 
+                info.getGender().put(username,(String) genderbox.getBox().getSelectedItem());
                 fname.getField().setEditable(false);
                 lname.getField().setEditable(false);
                 lname.getField().setEditable(false);
@@ -197,38 +203,47 @@ public class LoginPage implements ActionListener {
                 userField.setText("");
                 passwordField.setText("");
         }
+        if (e.getSource()==logOut){
+            
+            accountWindow.dispose();
+            userField.setText("");
+            passwordField.setText("");
+        }
         if(e.getSource()==withdraw || e.getSource()==deposit){
 
             balanceWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             balanceWindow.setLayout(null);
 
+            //Title
             JLabel title = new JLabel();
             String action = e.getActionCommand();
             if (action.equals("Withdraw")){
                 title.setText("Withdraw");
-                withEnter.setBounds(350,170,70,33);
-                withEnter.setFocusable(false);
-                balanceWindow.add(withEnter);
+                withdrawValue.setBounds(350,170,70,33);
+                withdrawValue.setFocusable(false);
+                withdrawValue.setEnabled(true);
+                balanceWindow.add(withdrawValue);
             }
             else {
                 title.setText("Deposit");
-                depositEnter.setBounds(350,170,70,33);
-                depositEnter.setFocusable(false);
-                balanceWindow.add(depositEnter);
+                depositValue.setBounds(350,170,70,33);
+                depositValue.setFocusable(false);
+                depositValue.setEnabled(true);
+                balanceWindow.add(depositValue);
             }
 
             title.setFont(new Font("Andale Mono",Font.PLAIN,15));
             title.setBounds(220,-70,190,190);
             title.setForeground(Color.WHITE);
 
-            Value.getField().setBackground(new Color(0x575658));
-            Value.getField().setForeground(Color.WHITE);
-            Value.getField().setHorizontalAlignment(SwingConstants.CENTER);
+            value.getField().setBackground(new Color(0x575658));
+            value.getField().setForeground(Color.WHITE);
+            value.getField().setHorizontalAlignment(SwingConstants.CENTER);
 
             balanceWindow.add(balance.getLabel());
             balanceWindow.add(balance.getField());
-            balanceWindow.add(Value.getLabel());
-            balanceWindow.add(Value.getField());
+            balanceWindow.add(value.getLabel());
+            balanceWindow.add(value.getField());
             balanceWindow.add(title);
             balanceWindow.getContentPane().setBackground(new Color(0x575658));
             balanceWindow.setBounds(500,100,500,235);
@@ -236,18 +251,32 @@ public class LoginPage implements ActionListener {
             balanceWindow.setVisible(true);
             accountWindow.dispose();
         }
-        if (e.getSource()==withEnter || e.getSource()==depositEnter){
-            double x = Double.parseDouble(Value.getField().getText());
+        if (e.getSource()==withdrawValue || e.getSource()==depositValue){
+            double x = Double.parseDouble(value.getField().getText());
             double val;
             String action = e.getActionCommand();
             if (action.equals("Withdraw")){
-                val = info.getMoney().get(username) - x;
+
+                double initval = info.getMoney().get(username);
+                int ans=0;
+                val =  initval - x;
+                if (val<0){
+                    ImageIcon icon = new ImageIcon("warning.png");
+                    ans = JOptionPane.showConfirmDialog(null,
+            "Are you sure?\nYou will be in debt.","Large Withdrawal Amount",
+                    JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, icon); 
+                }
+                if (ans==1){ //if answer is yes
+                    val = initval;
+                }
+                withdrawValue.setEnabled(false);
             }
             else {
                 val = info.getMoney().get(username) + x;
+                depositValue.setEnabled(false);
             }
             info.getMoney().put(username,val);
-            Value.getField().setText("");
+            value.getField().setText("");
             userField.setText("");
             passwordField.setText("");
         }  

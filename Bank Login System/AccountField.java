@@ -19,6 +19,7 @@ public class AccountField {
             field.setCaretColor(Color.BLACK); 
             field.setEditable(true);
     }
+    
     public AccountField(String title,int ylabel,int ybox,String[] options) {
         label = new JLabel(title);
         label.setBounds(40,ylabel,100,100);

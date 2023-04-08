@@ -255,11 +255,12 @@ public class LoginPage implements ActionListener {
             else {
                 val = info.getMoney().get(username) + x;
                 depositValue.setEnabled(false);
+               
             }
             info.getMoney().put(username,val);
+            balance.getField().setText(Double.toString(info.getMoney().get(username))); balance.getField().setEditable(false);
+            accountWindow.add(balance.getField());
             value.getSpinner().setValue(0);
-            user.getField().setText("");
-            passwordField.setText("");
         }  
     }
     public static void main (String[] args) {

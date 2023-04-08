@@ -14,7 +14,7 @@ public class AccountField {
 
             field = new JTextField();
             field.setBounds(xfield,yfield,wfield,hfield);
-            field.setCaretColor(Color.DARK_GRAY); 
+            field.setCaretColor(Color.BLACK); 
             field.setEditable(true);
     }
     public AccountField(String title,int ylabel,int ybox,String[] options) {

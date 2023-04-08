@@ -154,6 +154,14 @@ public class LoginPage implements ActionListener {
                     accountWindow.setResizable(false);
                     accountWindow.setVisible(true);
                 }
+                else {
+                    userField.setText("");
+                    passwordField.setText("");
+                }
+            }
+            else {
+                userField.setText("");
+                passwordField.setText("");
             }
         }
         if (e.getSource()==signUp) {

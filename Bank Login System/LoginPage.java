@@ -25,7 +25,7 @@ public class LoginPage implements ActionListener {
         String[] options = {"Male", "Female","Other"};
         genderbox = new AccountField("Gender :", 70, 110,options);
         balance = new AccountField("Balance :", 40,100,120,140,100,100,300,20); 
-        value = new AccountField("Withdraw :", 40,40,120,80,100,100,300,20);
+        value = new AccountField("Withdraw :", 0,10000,10);
         info = new UserAccounts();
 
         passwordField = new JPasswordField();
@@ -221,23 +221,19 @@ public class LoginPage implements ActionListener {
             title.setBounds(220,-70,190,190);
             title.setForeground(Color.WHITE);
 
-            value.getField().setBackground(new Color(0x575658));
-            value.getField().setForeground(Color.WHITE);
-            value.getField().setHorizontalAlignment(SwingConstants.CENTER);
-
             balanceWindow.add(balance.getLabel());
             balanceWindow.add(balance.getField());
             balanceWindow.add(value.getLabel());
-            balanceWindow.add(value.getField());
+            balanceWindow.add(value.getSpinner());
             balanceWindow.add(title);
             balanceWindow.getContentPane().setBackground(new Color(0x575658));
             balanceWindow.setBounds(500,100,500,235);
             balanceWindow.setResizable(false);
             balanceWindow.setVisible(true);
-            accountWindow.dispose();
         }
         if (e.getSource()==withdrawValue || e.getSource()==depositValue){
-            double x = Double.parseDouble(value.getField().getText());
+
+            double x = Double.parseDouble(value.getSpinner().getValue().toString());
             double val;
             String action = e.getActionCommand();
             if (action.equals("Withdraw")){
@@ -261,7 +257,7 @@ public class LoginPage implements ActionListener {
                 depositValue.setEnabled(false);
             }
             info.getMoney().put(username,val);
-            value.getField().setText("");
+            value.getSpinner().setValue(0);
             user.getField().setText("");
             passwordField.setText("");
         }  

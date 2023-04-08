@@ -20,8 +20,6 @@ public class LoginPage implements ActionListener {
     JButton withdraw;
     JButton withEnter;
     JButton depositEnter;
-    String username;
-    String password;
     AccountField fname;
     AccountField lname;
     AccountField gender; 
@@ -106,8 +104,8 @@ public class LoginPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        username = userField.getText();
-        password = String.valueOf(passwordField.getPassword());
+        String username = userField.getText();
+        String password = String.valueOf(passwordField.getPassword());
         JFrame balanceWindow = new JFrame();
         
         if (e.getSource()==signIn) {
@@ -204,7 +202,6 @@ public class LoginPage implements ActionListener {
             balanceWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             balanceWindow.setLayout(null);
 
-            //Title
             JLabel title = new JLabel();
             String action = e.getActionCommand();
             if (action.equals("Withdraw")){

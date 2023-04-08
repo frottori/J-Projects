@@ -4,14 +4,14 @@ import java.awt.*;
 
 public class LoginPage implements ActionListener {
 
-    UserAccounts info;
-    AccountField user,fname,lname,gender,genderbox,balance,value;
-    JPasswordField passwordField;
-    JLabel passwordLabel, label;
-    JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
-    JFrame accountWindow, forum, frame;
+    private UserAccounts info;
+    private AccountField user,fname,lname,gender,genderbox,balance,value;
+    private JPasswordField passwordField;
+    private JLabel passwordLabel, label;
+    private JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
+    private JFrame accountWindow, forum, frame;
 
-    LoginPage() {
+    public LoginPage() {
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,21 +1,21 @@
 import javax.swing.*;
 import java.awt.*;
-
 public class AccountField {
 
     private JLabel label;
     private JTextField field;
     JComboBox<String> comboBox;
 
-    public AccountField(String title,int ylabel,int yfield){
-                    label = new JLabel(title);
-                    label.setBounds(40,ylabel,100,100);
-                    label.setForeground(Color.WHITE);
+    public AccountField(String title,int xlabel,int ylabel,int xfield,int yfield,int wlabel,int hlabel,int wfield,int hfield){
+            label = new JLabel(title);
+            label.setBounds(xlabel,ylabel,wlabel,hlabel);
+            label.setForeground(Color.WHITE);
+            label.setFont(new Font("Helvetica",Font.PLAIN,15));
 
-                    field = new JTextField();
-                    field.setBounds(120,yfield,300,20);
-                    field.setCaretColor(Color.DARK_GRAY); 
-                    field.setEditable(true);
+            field = new JTextField();
+            field.setBounds(xfield,yfield,wfield,hfield);
+            field.setCaretColor(Color.DARK_GRAY); 
+            field.setEditable(true);
     }
     public AccountField(String title,int ylabel,int ybox,String[] options) {
         label = new JLabel(title);

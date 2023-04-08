@@ -5,45 +5,29 @@ import java.awt.*;
 public class LoginPage implements ActionListener {
 
     UserAccounts info;
-    JFrame accountWindow;
-    JFrame forum;
-    JFrame frame;
-    JTextField userField;
+    AccountField user,fname,lname,gender,genderbox,balance,value;
     JPasswordField passwordField;
-    JLabel userLabel;
-    JLabel passwordLabel;
-    JLabel label;
-    JButton signIn;
-    JButton signUp;
-    JButton register;
-    JButton logOut;
-    JButton deposit;
-    JButton withdraw;
-    JButton withdrawValue;
-    JButton depositValue;
-    AccountField fname;
-    AccountField lname;
-    AccountField genderbox; 
-    AccountField gender;
-    AccountField balance; 
-    AccountField value;
-    
+    JLabel passwordLabel, label;
+    JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
+    JFrame accountWindow, forum, frame;
+
     LoginPage() {
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(null);
 
-        //username
-        userField = new JTextField();
-        userField.setBounds(110,50,300,20);
-        userField.setCaretColor(Color.DARK_GRAY); 
+        //Account Information
+        user = new AccountField("username :",40,10,110,50,100,100,300,20);
+        fname = new AccountField("First Name :",40,10,120,50,100,100,300,20);     
+        lname = new AccountField("Last Name :", 40,40,120,80,100,100,300,20); 
+        gender = new AccountField("Gender :", 40,70,120,110,100,100,300,20); 
+        String[] options = {"Male", "Female","Other"};
+        genderbox = new AccountField("Gender :", 70, 110,options);
+        balance = new AccountField("Balance :", 40,100,120,140,100,100,300,20); 
+        value = new AccountField("Withdraw :", 40,40,120,80,100,100,300,20);
+        info = new UserAccounts();
 
-        userLabel = new JLabel("username :");
-        userLabel.setBounds(40,10,100,100);
-        userLabel.setForeground(Color.WHITE);
-
-        //password
         passwordField = new JPasswordField();
         passwordField.setBounds(110,100,300,20);
         passwordField.setCaretColor(Color.BLACK); 
@@ -51,10 +35,11 @@ public class LoginPage implements ActionListener {
         passwordLabel = new JLabel("password :");
         passwordLabel.setBounds(40,60,100,100);
         passwordLabel.setForeground(Color.WHITE);
+        passwordLabel.setFont(new Font("Helvetica",Font.PLAIN,15));
 
         //Title
         label = new JLabel("Bank Login Window");
-        label.setFont(new Font("Andale Mono",Font.PLAIN,15));
+        label.setFont(new Font("Helvetica",Font.PLAIN,15));
         label.setBounds(170,-70,190,190);
         label.setForeground(Color.WHITE);
 
@@ -80,9 +65,10 @@ public class LoginPage implements ActionListener {
         depositValue = new JButton("Deposit");
         depositValue.addActionListener(this);
 
+        //Frames 
         frame.add(label);
-        frame.add(userLabel);
-        frame.add(userField);
+        frame.add(user.getLabel());
+        frame.add(user.getField());
         frame.add(passwordLabel);
         frame.add(passwordField);
         frame.add(signIn);
@@ -92,24 +78,14 @@ public class LoginPage implements ActionListener {
         frame.getContentPane().setBackground(new Color(0x575658));
         frame.setVisible(true);
 
-       //Account Information
-        fname = new AccountField("First Name :",10,50); 
-        lname = new AccountField("Last Name :", 40, 80); 
-        gender = new AccountField("Gender :", 70, 110);
-        String[] options = {"Male", "Female","Other"};
-        genderbox = new AccountField("Gender :", 70, 110,options);
-        balance = new AccountField("Balance :", 100, 140); 
-        value = new AccountField("Withdraw :", 40, 80);
-        info = new UserAccounts();
-
-        //Frames
         accountWindow = new JFrame();
         forum = new JFrame();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String username = userField.getText();
+
+        String username = user.getField().getText();
         String password = String.valueOf(passwordField.getPassword());
         JFrame balanceWindow = new JFrame();
         
@@ -120,8 +96,9 @@ public class LoginPage implements ActionListener {
                     accountWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     accountWindow.setLayout(null);
 
+                    //Title
                     JLabel title = new JLabel("Account Information");
-                    title.setFont(new Font("Andale Mono",Font.PLAIN,15));
+                    title.setFont(new Font("Helvetica",Font.PLAIN,15));
                     title.setBounds(170,-70,190,190);
                     title.setForeground(Color.WHITE);
 
@@ -155,25 +132,25 @@ public class LoginPage implements ActionListener {
                     accountWindow.setVisible(true);
                 }
                 else {
-                    userField.setText("");
+                    user.getField().setText("");
                     passwordField.setText("");
                 }
             }
             else {
-                userField.setText("");
+                user.getField().setText("");
                 passwordField.setText("");
             }
         }
         if (e.getSource()==signUp) {
-            if (!info.getLoginInfo().containsKey(username))  {  //if username isn't already taken
+            if (!info.getLoginInfo().containsKey(username))  {  
                
-                info.getLoginInfo().put(username,password); //puts new entry on hashmap
+                info.getLoginInfo().put(username,password); 
                 forum.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 forum.setLayout(null);
 
                 //Title
                 JLabel title = new JLabel("Sign Up Page");
-                title.setFont(new Font("Andale Mono",Font.PLAIN,15));
+                title.setFont(new Font("Helvetica",Font.PLAIN,15));
                 title.setBounds(180,-70,190,190);
                 title.setForeground(Color.WHITE);
 
@@ -208,13 +185,13 @@ public class LoginPage implements ActionListener {
                 lname.getField().setEditable(false);
                 lname.getField().setEditable(false);
                 forum.dispose();
-                userField.setText("");
+                user.getField().setText("");
                 passwordField.setText("");
         }
         if (e.getSource()==logOut){
             
             accountWindow.dispose();
-            userField.setText("");
+            user.getField().setText("");
             passwordField.setText("");
         }
         if(e.getSource()==withdraw || e.getSource()==deposit){
@@ -240,7 +217,7 @@ public class LoginPage implements ActionListener {
                 balanceWindow.add(depositValue);
             }
 
-            title.setFont(new Font("Andale Mono",Font.PLAIN,15));
+            title.setFont(new Font("Helvetica",Font.PLAIN,15));
             title.setBounds(220,-70,190,190);
             title.setForeground(Color.WHITE);
 
@@ -274,7 +251,7 @@ public class LoginPage implements ActionListener {
             "Are you sure?\nYou will be in debt.","Large Withdrawal Amount",
                     JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, icon); 
                 }
-                if (ans==1){ //if answer is yes
+                if (ans==1){ 
                     val = initval;
                 }
                 withdrawValue.setEnabled(false);
@@ -285,7 +262,7 @@ public class LoginPage implements ActionListener {
             }
             info.getMoney().put(username,val);
             value.getField().setText("");
-            userField.setText("");
+            user.getField().setText("");
             passwordField.setText("");
         }  
     }

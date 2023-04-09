@@ -8,9 +8,10 @@ public class LoginPage implements ActionListener {
     AccountField user,fname,lname,gender,genderbox,balance,value;
     JPasswordField passwordField;
     JLabel passwordLabel, label;
+    JCheckBox passBox;
     JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
     JFrame accountWindow, forum, frame;
-
+    
     LoginPage() {
 
         frame = new JFrame();
@@ -29,27 +30,39 @@ public class LoginPage implements ActionListener {
         info = new UserAccounts();
 
         passwordField = new JPasswordField();
-        passwordField.setBounds(110,100,300,20);
+        passwordField.setBounds(110,80,300,20);
         passwordField.setCaretColor(Color.BLACK); 
         
         passwordLabel = new JLabel("password :");
-        passwordLabel.setBounds(40,60,100,100);
+        passwordLabel.setBounds(40,40,100,100);
         passwordLabel.setForeground(Color.WHITE);
         passwordLabel.setFont(new Font("Helvetica",Font.PLAIN,15));
+        
+        ImageIcon check = new ImageIcon("checked.png");
+        ImageIcon uncheck = new ImageIcon("unchecked.png");
+        passBox = new JCheckBox();
+        passBox.setBounds(410,40,300,100);
+        passBox.setFocusable(false);
+        passBox.setFont(new Font("Helvetica",Font.PLAIN,15));
+        passBox.setForeground(Color.WHITE);
+        passBox.addActionListener(this);
+        passBox.setIcon(null);
+        passBox.setIcon(uncheck);
+        passBox.setSelectedIcon(check);
 
         //Title
         label = new JLabel("Bank Login Window");
-        label.setFont(new Font("Helvetica",Font.PLAIN,15));
+        label.setFont(new Font("Carlson",Font.PLAIN,15));
         label.setBounds(170,-70,190,190);
         label.setForeground(Color.WHITE);
 
         //Buttons
         signIn = new JButton("Sign In");
         signUp = new JButton("Sign Up");
-        signIn.setBounds(280,130,70,33);
+        signIn.setBounds(270,105,70,33);
         signIn.setFocusable(false);
         signIn.addActionListener(this);
-        signUp.setBounds(350,130,70,33);
+        signUp.setBounds(340,105,70,33);
         signUp.setFocusable(false);
         signUp.addActionListener(this);
         register = new JButton("Register");
@@ -71,10 +84,11 @@ public class LoginPage implements ActionListener {
         frame.add(user.getField());
         frame.add(passwordLabel);
         frame.add(passwordField);
+        frame.add(passBox);
         frame.add(signIn);
         frame.add(signUp);
         frame.setResizable(false);
-        frame.setBounds(500,100,500,220);
+        frame.setBounds(500,100,500,200);
         frame.getContentPane().setBackground(new Color(0x575658));
         frame.setVisible(true);
 
@@ -88,7 +102,15 @@ public class LoginPage implements ActionListener {
         String username = user.getField().getText();
         String password = String.valueOf(passwordField.getPassword());
         JFrame balanceWindow = new JFrame();
-        
+
+        if (e.getSource()==passBox){
+            if(passBox.isSelected()) {
+                passwordField.setEchoChar('\u0000');
+            }
+            else {
+                passwordField.setEchoChar('●');
+            }
+        }
         if (e.getSource()==signIn) {
             if(info.getLoginInfo().containsKey(username)) {
                 if(info.getLoginInfo().get(username).equals(password)) {
@@ -97,7 +119,7 @@ public class LoginPage implements ActionListener {
                     accountWindow.setLayout(null);
 
                     JLabel title = new JLabel("Account Information");
-                    title.setFont(new Font("Helvetica",Font.PLAIN,15));
+                    title.setFont(new Font("Carlson",Font.PLAIN,15));
                     title.setBounds(170,-70,190,190);
                     title.setForeground(Color.WHITE);
 
@@ -144,7 +166,7 @@ public class LoginPage implements ActionListener {
                 forum.setLayout(null);
 
                 JLabel title = new JLabel("Sign Up Page");
-                title.setFont(new Font("Helvetica",Font.PLAIN,15));
+                title.setFont(new Font("Carlson",Font.PLAIN,15));
                 title.setBounds(180,-70,190,190);
                 title.setForeground(Color.WHITE);
 
@@ -169,18 +191,22 @@ public class LoginPage implements ActionListener {
         }
         if(e.getSource()==register) {
 
-                info.getFirstName().put(username,fname.getField().getText());
-                info.getLastName().put(username,lname.getField().getText());
-                info.getGender().put(username,(String) genderbox.getBox().getSelectedItem());
-                forum.dispose();
-                user.getField().setText("");
-                passwordField.setText("");
+            if (!fname.getField().getText().equals("") && !lname.getField().getText().equals("") ) {
+                    info.getFirstName().put(username,fname.getField().getText());
+                    info.getLastName().put(username,lname.getField().getText());
+                    info.getGender().put(username,(String) genderbox.getBox().getSelectedItem());
+                    forum.dispose();
+                    user.getField().setText("");
+                    passwordField.setText("");
+                    passwordField.setEchoChar('●');
+                }    
         }
         if (e.getSource()==logOut){
             
             accountWindow.dispose();
             user.getField().setText("");
             passwordField.setText("");
+            passwordField.setEchoChar('●');
         }
         if(e.getSource()==withdraw || e.getSource()==deposit){
 
@@ -204,7 +230,7 @@ public class LoginPage implements ActionListener {
                 balanceWindow.add(depositValue);
             }
 
-            title.setFont(new Font("Helvetica",Font.PLAIN,15));
+            title.setFont(new Font("Carlson",Font.PLAIN,15));
             title.setBounds(220,-70,190,190);
             title.setForeground(Color.WHITE);
 

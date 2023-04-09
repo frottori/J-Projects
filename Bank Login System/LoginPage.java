@@ -4,14 +4,14 @@ import java.awt.*;
 
 public class LoginPage implements ActionListener {
 
-    private UserAccounts info;
-    private AccountField user,fname,lname,gender,genderbox,balance,value;
-    private JPasswordField passwordField;
-    private JLabel passwordLabel, label;
-    private JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
-    private JFrame accountWindow, forum, frame;
+    UserAccounts info;
+    AccountField user,fname,lname,gender,genderbox,balance,value;
+    JPasswordField passwordField;
+    JLabel passwordLabel, label;
+    JButton signIn, signUp,register, logOut,deposit,withdraw,withdrawValue,depositValue;
+    JFrame accountWindow, forum, frame;
 
-    public LoginPage() {
+    LoginPage() {
 
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -96,7 +96,6 @@ public class LoginPage implements ActionListener {
                     accountWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                     accountWindow.setLayout(null);
 
-                    //Title
                     JLabel title = new JLabel("Account Information");
                     title.setFont(new Font("Helvetica",Font.PLAIN,15));
                     title.setBounds(170,-70,190,190);
@@ -114,14 +113,10 @@ public class LoginPage implements ActionListener {
                     deposit.setBounds(350,170,70,33);
                     deposit.setFocusable(false);
 
-                    accountWindow.add(fname.getField());
-                    accountWindow.add(fname.getLabel());
-                    accountWindow.add(lname.getField());
-                    accountWindow.add(lname.getLabel());
-                    accountWindow.add(gender.getField());
-                    accountWindow.add(gender.getLabel());
-                    accountWindow.add(balance.getField());
-                    accountWindow.add(balance.getLabel());
+                    accountWindow.add(fname.getField()); accountWindow.add(fname.getLabel());
+                    accountWindow.add(lname.getField()); accountWindow.add(lname.getLabel());
+                    accountWindow.add(gender.getField()); accountWindow.add(gender.getLabel());
+                    accountWindow.add(balance.getField()); accountWindow.add(balance.getLabel());
                     accountWindow.add(logOut);
                     accountWindow.add(withdraw);
                     accountWindow.add(deposit);
@@ -142,13 +137,12 @@ public class LoginPage implements ActionListener {
             }
         }
         if (e.getSource()==signUp) {
-            if (!info.getLoginInfo().containsKey(username))  {  
+            if (!info.getLoginInfo().containsKey(username) && !user.getField().getText().equals(""))  {  
                
                 info.getLoginInfo().put(username,password); 
                 forum.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 forum.setLayout(null);
 
-                //Title
                 JLabel title = new JLabel("Sign Up Page");
                 title.setFont(new Font("Helvetica",Font.PLAIN,15));
                 title.setBounds(180,-70,190,190);
@@ -162,12 +156,9 @@ public class LoginPage implements ActionListener {
                 fname.getField().setText(""); fname.getField().setEditable(true);
                 lname.getField().setText(""); lname.getField().setEditable(true);
                 
-                forum.add(fname.getField());
-                forum.add(fname.getLabel());
-                forum.add(lname.getField());
-                forum.add(lname.getLabel());
-                forum.add(genderbox.getLabel());
-                forum.add(genderbox.getBox());
+                forum.add(fname.getField());  forum.add(fname.getLabel());
+                forum.add(lname.getField()); forum.add(lname.getLabel());
+                forum.add(genderbox.getLabel()); forum.add(genderbox.getBox());
                 forum.add(register);
                 forum.add(title);
                 forum.getContentPane().setBackground(new Color(0x575658));
@@ -176,14 +167,11 @@ public class LoginPage implements ActionListener {
                 forum.setVisible(true);
             }
         }
-        if(e.getSource()==register)
-        {
+        if(e.getSource()==register) {
+
                 info.getFirstName().put(username,fname.getField().getText());
                 info.getLastName().put(username,lname.getField().getText());
                 info.getGender().put(username,(String) genderbox.getBox().getSelectedItem());
-                fname.getField().setEditable(false);
-                lname.getField().setEditable(false);
-                lname.getField().setEditable(false);
                 forum.dispose();
                 user.getField().setText("");
                 passwordField.setText("");
@@ -199,7 +187,6 @@ public class LoginPage implements ActionListener {
             balanceWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             balanceWindow.setLayout(null);
 
-            //Title
             JLabel title = new JLabel();
             String action = e.getActionCommand();
             if (action.equals("Withdraw")){
@@ -221,10 +208,8 @@ public class LoginPage implements ActionListener {
             title.setBounds(220,-70,190,190);
             title.setForeground(Color.WHITE);
 
-            balanceWindow.add(balance.getLabel());
-            balanceWindow.add(balance.getField());
-            balanceWindow.add(value.getLabel());
-            balanceWindow.add(value.getSpinner());
+            balanceWindow.add(balance.getLabel()); balanceWindow.add(balance.getField());
+            balanceWindow.add(value.getLabel()); balanceWindow.add(value.getSpinner());
             balanceWindow.add(title);
             balanceWindow.getContentPane().setBackground(new Color(0x575658));
             balanceWindow.setBounds(500,100,500,235);
@@ -248,7 +233,7 @@ public class LoginPage implements ActionListener {
                     JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, icon); 
                 }
                 if (ans==1){ 
-                    val = initval;
+                val = initval;
                 }
                 withdrawValue.setEnabled(false);
             }

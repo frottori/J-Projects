@@ -5,8 +5,8 @@ public class AccountField {
 
     private JLabel label;
     private JTextField field;
-    private JComboBox<String> comboBox;
-    private JSpinner spinner;
+    JComboBox<String> comboBox;
+    JSpinner spinner;
 
     public AccountField(String title,int xlabel,int ylabel,int xfield,int yfield,int wlabel,int hlabel,int wfield,int hfield){
             label = new JLabel(title);

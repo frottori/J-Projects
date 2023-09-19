@@ -14,7 +14,7 @@ public class UserAccounts {
     private HashMap <String,String> lastName = new HashMap<String,String>();
     String dbUrl = "jdbc:mysql://localhost:3306/BankLoginSystem";
     String username = "root";
-    String password = "Kalampoki-2003";
+    String password = " "; //Password to Database
 
     public UserAccounts(){
         // Load the MySQL JDBC driver

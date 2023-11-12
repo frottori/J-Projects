@@ -9,3 +9,6 @@ The main function is contained on the LoginPage.java .
 
 ### V2 :
 Updated UserAccounts that uses MySQL Database (local host) to hold the Account Information for each User so that everytime the program is executed the changes to the Accounts are saved and also if a new user is created. 
+
+## V3 :
+Access to the database even remotely using TCP Sockets where a server has a local connection to the database and the Client accesses the information via the Server (here it is localhost but you can configure it over the internet)

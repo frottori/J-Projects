@@ -9,3 +9,6 @@ Meanwhile, the compiled output files will be generated in the `bin` folder by de
 
 ## SQL Script
 The `Server` workspace has a `BankLoginSystem.sql` that makes a local database with some default accounts. You need to run it for the database to work in the PC you want to have as a server.
+
+## .JAR File
+The `Client.jar` open the Application and has access to the database only when the Server is running

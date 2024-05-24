@@ -12,3 +12,6 @@ Updated UserAccounts that uses MySQL Database (local host) to hold the Account I
 
 ## V3 :
 Access to the database even remotely using TCP Sockets where a server has a local connection to the database and the Client accesses the information via the Server (here it is localhost but you can configure it over the internet)
+
+## V4:
+A website of the BankLoginSystem with access to the accounts database. This is done with Maven WebApp project and the deployment is done locally using TomCat Server. You can deploy it locally using the .war file and you also need the database to your system.
